@@ -1,0 +1,16 @@
+server:
+  servlet:
+    context-path: /weatheranalyze/api/
+
+application:
+  dark-sky-weather:
+    location-latitude: '55.717453'
+    location-longitude: '37.657541'
+    api-key: 'a74a81239b7cf81251d83adfd5e236df'
+  jobs:
+    current-weather:
+      enable: false
+      triggers:
+        cron:
+          enable: false
+          value: '0 0 * * * ?'
