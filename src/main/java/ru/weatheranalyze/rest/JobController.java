@@ -1,6 +1,9 @@
 package ru.weatheranalyze.rest;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.SwaggerDefinition;
+import io.swagger.annotations.Tag;
 import lombok.RequiredArgsConstructor;
 import org.quartz.SchedulerException;
 import org.quartz.Trigger;
@@ -11,6 +14,11 @@ import ru.weatheranalyze.sheduler.service.JobService;
 
 import java.util.List;
 
+
+@SwaggerDefinition(tags = {
+        @Tag(name = "job", description = "Executing and setting for application jobs")
+})
+@Api(tags = {"job"})
 @RestController
 @RequiredArgsConstructor
 public class JobController {
