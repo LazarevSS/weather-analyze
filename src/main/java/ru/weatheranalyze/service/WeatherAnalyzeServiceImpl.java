@@ -1,6 +1,6 @@
 package ru.weatheranalyze.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.weatheranalyze.model.WeatherStatistic;
 import ru.weatheranalyze.repository.WeatherStatisticRepository;
@@ -12,6 +12,7 @@ import java.util.NoSuchElementException;
 import java.util.UUID;
 
 @Service
+@RequiredArgsConstructor
 public class WeatherAnalyzeServiceImpl implements WeatherAnalyzeService {
 
     private final WeatherStatisticRepository repository;
@@ -36,11 +37,6 @@ public class WeatherAnalyzeServiceImpl implements WeatherAnalyzeService {
     public void delete(UUID id) {
         WeatherStatistic entity = getById(id);
         repository.delete(entity);
-    }
-
-    @Autowired
-    public WeatherAnalyzeServiceImpl(WeatherStatisticRepository repository) {
-        this.repository = repository;
     }
 
     @Override

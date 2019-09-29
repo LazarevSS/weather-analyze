@@ -1,7 +1,7 @@
 package ru.weatheranalyze.sheduler.common;
 
 import org.quartz.Job;
-import ru.weatheranalyze.sheduler.job.CurrentWeather;
+import ru.weatheranalyze.sheduler.job.CurrentWeatherJob;
 
 
 import java.util.Arrays;
@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public enum JobDefinition {
 
-    CURRENT_WEATHER("currentWeather", CurrentWeather.class);
+    CURRENT_WEATHER("currentWeather", CurrentWeatherJob.class);
 
     private String name;
     private Class<? extends Job> clazz;

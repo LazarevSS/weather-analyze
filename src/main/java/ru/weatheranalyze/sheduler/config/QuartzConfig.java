@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import ru.weatheranalyze.sheduler.common.CommonJobDetailBuilder;
 import ru.weatheranalyze.sheduler.common.CommonTriggerDetailBuilder;
-import ru.weatheranalyze.sheduler.job.CurrentWeather;
+import ru.weatheranalyze.sheduler.job.CurrentWeatherJob;
 
 
 @Configuration
@@ -23,7 +23,7 @@ public class QuartzConfig {
         havingValue = "true")
     public JobDetail currentWeatherJobDetail() {
         return CommonJobDetailBuilder.buildJobDetail(
-                CurrentWeather.class, "currentWeather");
+                CurrentWeatherJob.class, "currentWeather");
     }
 
     @Bean

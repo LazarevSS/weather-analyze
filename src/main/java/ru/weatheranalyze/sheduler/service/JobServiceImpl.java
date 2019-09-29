@@ -1,5 +1,6 @@
 package ru.weatheranalyze.sheduler.service;
 
+import lombok.val;
 import org.quartz.*;
 import org.quartz.impl.matchers.GroupMatcher;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,7 @@ public class JobServiceImpl implements JobService {
 
     @Override
     public void trigger(JobDefinition definition, String cronExpression) throws SchedulerException {
-        JobKey jobKey = findByName(definition.getName());
+        val jobKey = findByName(definition.getName());
         if (Objects.nonNull(jobKey)) {
             scheduler.resumeJob(jobKey);
         } else {
@@ -41,7 +42,7 @@ public class JobServiceImpl implements JobService {
 
     @Override
     public void reshedule(JobDefinition definition, String cronExpression) throws SchedulerException {
-        JobKey job = findByName(definition.getName());
+        val job = findByName(definition.getName());
         if (Objects.nonNull(job)) {
             TriggerKey key = TriggerKey.triggerKey(definition.getName() + "Trigger");
             Trigger trigger = CommonTriggerDetailBuilder.buildTrigger(cronExpression, scheduler.getJobDetail(job),
@@ -51,7 +52,7 @@ public class JobServiceImpl implements JobService {
     }
 
     private void createJob(JobDefinition definition, String cronExpression) throws SchedulerException {
-        JobDetail jobDetail = CommonJobDetailBuilder.buildJobDetail(definition.getClazz(), definition.getName());
+        val jobDetail = CommonJobDetailBuilder.buildJobDetail(definition.getClazz(), definition.getName());
         Trigger trigger = CommonTriggerDetailBuilder.buildTrigger(
             cronExpression, jobDetail, definition.getName() + "Trigger");
         scheduler.scheduleJob(jobDetail, trigger);
@@ -59,7 +60,7 @@ public class JobServiceImpl implements JobService {
 
     @Override
     public void pause(JobDefinition definition) throws SchedulerException {
-        JobKey job = findByName(definition.getName());
+        val job = findByName(definition.getName());
         if (Objects.nonNull(job)) {
             scheduler.pauseJob(job);
         }
@@ -67,7 +68,7 @@ public class JobServiceImpl implements JobService {
 
     @Override
     public Trigger.TriggerState status(JobDefinition definition) throws SchedulerException {
-        Trigger trigger = scheduler.getTrigger(TriggerKey.triggerKey(definition.getName() + "Trigger"));
+        val trigger = scheduler.getTrigger(TriggerKey.triggerKey(definition.getName() + "Trigger"));
         if (Objects.isNull(trigger))
             return Trigger.TriggerState.NONE;
         return scheduler.getTriggerState(trigger.getKey());
@@ -75,7 +76,7 @@ public class JobServiceImpl implements JobService {
 
     @Override
     public String getCronExpression(JobDefinition definition) throws SchedulerException {
-        Trigger trigger = scheduler.getTrigger(TriggerKey.triggerKey(definition.getName() + "Trigger"));
+        val trigger = scheduler.getTrigger(TriggerKey.triggerKey(definition.getName() + "Trigger"));
         if (trigger instanceof CronTrigger) {
             CronTrigger cronTrigger = (CronTrigger) trigger;
             return cronTrigger.getCronExpression();
