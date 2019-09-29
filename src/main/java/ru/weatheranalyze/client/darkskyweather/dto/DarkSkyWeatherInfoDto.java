@@ -13,7 +13,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-class DarkSkyWeatherInfoDto {
+public class DarkSkyWeatherInfoDto {
 
     @ApiModelProperty(value = "The type of precipitation occurring at the given time", example = "rain, snow, sleet")
     @JsonProperty("precipType")
